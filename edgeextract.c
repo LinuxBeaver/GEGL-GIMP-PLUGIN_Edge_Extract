@@ -14,7 +14,7 @@
  * License along with GEGL; if not, see <https://www.gnu.org/licenses/>.
  *
  * Copyright 2006 Øyvind Kolås <pippin@gimp.org>
- * 2022 Beaver (GEGL Edge Detection)
+ * 2022 Beaver (GEGL Edge Detection Extract)
  */
 
 #include "config.h"
@@ -22,19 +22,12 @@
 
 #ifdef GEGL_PROPERTIES
 
-property_double (edgeradius, _("Edge Radius"), 2.8)
-   description (_("Radius of effect (in pixels)"))
-   value_range (1.0, 6.0)
-   ui_gamma    (2.0)
-   ui_range    (0.0, 6.0)
-   ui_meta     ("unit", "pixel-distance")
 
 
-
-property_double (edgeamount, _("Edge Amount"), 1)
+property_double (edgeamount, _("Edge Amount"), 10)
    description (_("Strength of Effect"))
-   value_range (0.1, 2.5)
-   ui_range    (0.1, 2.5)
+   value_range (3.0, 16.0)
+   ui_range    (3.0, 16.0)
 
 
 property_double (threshold, _("Threshold"), 0.76)
@@ -42,10 +35,10 @@ property_double (threshold, _("Threshold"), 0.76)
     ui_range    (-0.25, 0.90)
     description(_("Scalar threshold level (overridden if an auxiliary input buffer is provided.)."))
 
-property_double (gaus, _("Blur"), 1.5)
+property_double (gaus, _("Blur"), 1.0)
    description (_("Standard deviation (spatial scale factor)"))
-   value_range (1.5, 2.5)
-   ui_range    (1.5, 2.5)
+   value_range (0.5, 2.5)
+   ui_range    (0.5, 2.5)
    ui_gamma    (3.0)
    ui_meta     ("unit", "pixel-distance")
    ui_meta     ("axis", "y")
@@ -75,7 +68,7 @@ static void attach (GeglOperation *operation)
 
 
   edge = gegl_node_new_child (gegl,
-                                  "operation", "gegl:edge-neon",
+                                  "operation", "gegl:edge",
                                   NULL);
 
 
@@ -110,7 +103,6 @@ static void attach (GeglOperation *operation)
 
   gegl_operation_meta_redirect (operation, "gray", gray, "gray");
 
-  gegl_operation_meta_redirect (operation, "edgeradius", edge, "radius");
 
   gegl_operation_meta_redirect (operation, "edgeamount", edge, "amount");
 
@@ -154,7 +146,7 @@ gegl_op_class_init (GeglOpClass *klass)
     "title",       _("Edge Extraction"),
     "categories",  "edge detect",
     "reference-hash", "456j6bfghd60f4f65s52dac",
-    "description", _("Extract edges with the edge neon algorithm and other things    "
+    "description", _("Extract edges with the edge sobel algorithm and other things    "
                      ""),
     NULL);
 }
