@@ -1,7 +1,7 @@
 gegl:edge-extract
 =========
 
-A custom GEGL operation (and by extension GIMP filter) that extracts edges using the existing gegl edge-neon algorithm
+A custom GEGL operation (and by extension GIMP filter) that extracts edges using the existing gegl edge-sobel algorithm
 
 
 ## Compiling and Installing
