@@ -37,11 +37,17 @@ property_double (threshold, _("Threshold"), 0.76)
 
 property_double (gaus, _("Blur"), 1.0)
    description (_("Standard deviation (spatial scale factor)"))
-   value_range (0.5, 2.5)
-   ui_range    (0.5, 2.5)
+   value_range (0.5, 6.5)
+   ui_range    (0.5, 6.5)
    ui_gamma    (3.0)
    ui_meta     ("unit", "pixel-distance")
    ui_meta     ("axis", "y")
+
+property_color (value, _("Color"), "#ffffff")
+    description (_("The color to paint over the input"))
+
+
+
 
 
 
@@ -56,7 +62,7 @@ property_double (gaus, _("Blur"), 1.0)
 static void attach (GeglOperation *operation)
 {
   GeglNode *gegl = operation->node;
-  GeglNode *input, *output, *gray, *edge, *threshold, *c2a, *invert, *vinvert, *gaus;
+  GeglNode *input, *output, *gray, *edge, *threshold, *c2a, *invert, *vinvert, *color, *gaus;
 
   input    = gegl_node_get_input_proxy (gegl, "input");
   output   = gegl_node_get_output_proxy (gegl, "output");
@@ -98,6 +104,11 @@ static void attach (GeglOperation *operation)
                                   NULL);
 
 
+   color = gegl_node_new_child (gegl,
+                                  "operation", "gegl:color-overlay",
+                                  NULL);
+
+
 
 
 
@@ -112,6 +123,7 @@ static void attach (GeglOperation *operation)
 
   gegl_operation_meta_redirect (operation, "gaus", gaus, "std-dev-y");
 
+  gegl_operation_meta_redirect (operation, "value", color, "value");
 
 
 
@@ -125,7 +137,8 @@ static void attach (GeglOperation *operation)
 
 
 
-  gegl_node_link_many (input, gray, edge, threshold, invert, c2a, gaus, vinvert, output, NULL);
+
+  gegl_node_link_many (input, gray, edge, threshold, invert, c2a, gaus, vinvert, color, output, NULL);
 
 
 
