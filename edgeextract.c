@@ -31,7 +31,7 @@ property_double (edgeamount, _("Edge Amount"), 10)
 
 
 property_double (threshold, _("Threshold"), 0.76)
-    value_range (0.25, 0.90)
+    value_range (-0.25, 0.90)
     ui_range    (-0.25, 0.90)
     description(_("Scalar threshold level (overridden if an auxiliary input buffer is provided.)."))
 
@@ -157,7 +157,7 @@ gegl_op_class_init (GeglOpClass *klass)
   gegl_operation_class_set_keys (operation_class,
     "name",        "gegl:edge-extract",
     "title",       _("Edge Extraction"),
-    "categories",  "edge detect",
+    "categories",  "Thirdpartyfilters",
     "reference-hash", "456j6bfghd60f4f65s52dac",
     "description", _("Extract edges with the edge sobel algorithm and other things    "
                      ""),
