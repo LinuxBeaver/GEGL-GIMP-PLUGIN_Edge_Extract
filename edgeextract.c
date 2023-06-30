@@ -17,6 +17,19 @@
  * 2022 Beaver (GEGL Edge Detection Extract)
  */
 
+/* June 25 2023 recreation of GEGL Graph. If you feed this syntax into
+Gimp's GEGL graph you can run this filter without installing it.
+
+gray
+edge algorithm=sobel
+gegl:threshold value=0.4
+invert
+color-to-alpha color=#ffffff
+gaussian-blur std-dev-x=0.5 std-dev-y=0.5
+value-invert
+color-overlay value=#0fff00
+ */
+
 #include "config.h"
 #include <glib/gi18n-lib.h>
 
