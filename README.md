@@ -1,5 +1,7 @@
 gegl:edge-extract
 =========
+![image](preview.png)
+
 
 A custom GEGL operation (and by extension GIMP filter) that extracts edges using the existing gegl edge-sobel algorithm
 
