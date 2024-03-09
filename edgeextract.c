@@ -131,7 +131,7 @@ gegl_op_class_init (GeglOpClass *klass)
   operation_class->attach = attach;
 
   gegl_operation_class_set_keys (operation_class,
-    "name",        "gegl:edge-extract",
+    "name",        "lb:edge-extract",
     "title",       _("Edge Extraction"),
     "categories",  "Thirdpartyfilters",
     "reference-hash", "456j6bfghd60f4f65s52dac",
