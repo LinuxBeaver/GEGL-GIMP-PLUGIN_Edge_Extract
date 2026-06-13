@@ -18,7 +18,7 @@
  */
 
 /* June 25 2023 recreation of GEGL Graph. If you feed this syntax into
-Gimp's GEGL graph you can run this filter without installing it.
+Gimpꞌs GEGL graph you can run this filter without installing it.
 
 gray
 edge algorithm=sobel
